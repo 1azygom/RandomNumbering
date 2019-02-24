@@ -1,7 +1,7 @@
 import os
 import random
 
-def renumbering():
+def numbering(re_numbering = False):
     directory = input("경로를 입력하세요: ")
 
     list = os.listdir(directory)
@@ -16,32 +16,12 @@ def renumbering():
         number = number_list[random.randrange(len(number_list))]
 
         old_file = os.path.join(directory, filename)
-        new_filename = ("%d. " + filename[filename.find(".") + 2:]) % (number + 1)
-        new_file = os.path.join(directory, new_filename)
         
-        os.rename(old_file, new_file)
-        print(filename + " -> " + new_filename)
-        
-        number_list.remove(number)
-    
-    print("*** 완료되었습니다. ***")
+        if re_numbering == True:
+            new_filename = ("%d. " + filename[filename.find(".") + 2:]) % (number + 1)
+        else:
+            new_filename = ("%d. " + filename) % (number + 1)
 
-def numbering():
-    directory = input("경로를 입력하세요: ")
-
-    list = os.listdir(directory)
-    files_count = len(list)
-
-    number_list = []
-
-    for i in range(files_count):
-        number_list.append(i)
-
-    for filename in list:
-        number = number_list[random.randrange(len(number_list))]
-
-        old_file = os.path.join(directory, filename)
-        new_filename = ("%d. " + filename) % (number + 1)
         new_file = os.path.join(directory, new_filename)
         
         os.rename(old_file, new_file)
@@ -56,4 +36,4 @@ if __name__ == "__main__":
     if select == "1":
         numbering()
     elif select == "2":
-        renumbering()
+        numbering(True)

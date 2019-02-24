@@ -4,7 +4,8 @@ import random
 def numbering(re_numbering = False):
     directory = input("경로를 입력하세요: ")
 
-    list = os.listdir(directory)
+    list = [file for file in os.listdir(directory)
+            if os.path.isfile(os.path.join(directory, file))]
     files_count = len(list)
 
     number_list = []
